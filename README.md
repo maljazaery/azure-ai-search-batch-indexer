@@ -1,5 +1,5 @@
 
-# Azure Document Layout Parser - batch processing using multi endpoints
+# Azure Document Intelligence Parser - batch processing using multi endpoints
 This script is designed to batch process documents using Azure Document Intelligence Service. It transforms unstructured text into a structured markdown format, which facilitates the identification of section breakpoints, as well as, generating a better text represetaions for table data. This is particularly useful in the development of RAG AI application.
 
 ## Requirements
