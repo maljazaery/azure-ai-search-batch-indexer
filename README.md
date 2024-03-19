@@ -64,8 +64,8 @@ python main.py /path/to/input/directory /path/to/output/directory /path/to/confi
 - output_dir: The directory to write the output files.
 - config_file: Azure AI Document Intelligence endpoints.
 
-## Note:
-This is unofficial Microsoft product.
+## Disclaimer:
+This is NOT an official Microsoft product. 
 
 
 
