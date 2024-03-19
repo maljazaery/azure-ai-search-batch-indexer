@@ -1,0 +1,7 @@
+langchain 
+langchain-community
+langchain-openai
+langchainhub 
+openai
+tiktoken
+azure-ai-documentintelligence
