@@ -16,9 +16,9 @@ You can run the script from the command line like this:
 python main.py /path/to/input/directory /path/to/output/directory /path/to/config/file
 ```
 ## Arguments:
-input_dir: The directory containing the input document files.
-output_dir: The directory to write the output files.
-config_file: The configuration file.
+- input_dir: The directory containing the input document files.
+- output_dir: The directory to write the output files.
+- config_file: Azure AI Document Intelligence endpoints.
 
 ## Note:
 This is unofficial Microsoft product.
