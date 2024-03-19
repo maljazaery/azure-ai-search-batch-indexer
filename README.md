@@ -8,7 +8,7 @@ This script is designed to batch process documents using Azure Document Intellig
 ## Example:
 
 - Input: 
-![sample](https://github.com/maljazaery_microsoft/azure_doc_parser/assets/154848787/f3eaf4f2-1cae-4db0-a777-2fda860e0058)
+![sample](https://github.com/maljazaery/azure-doc-batch-processor/blob/main/sample.png)
 - Output:
 ```
 ## Recent Accounting Guidance
@@ -47,11 +47,14 @@ Anti-dilutive stock-based awards excluded from the calculations of diluted EPS w
 ```
 
 ## Installation
+
+```bash
 pip install requirements.txt
+```
 
 ## Usage
-
-You can run the script from the command line like this:
+1- Create a config file similar to config.yaml.example, and add the Azure Doc Intelligance endpoints to it.  
+2- You can run the script from the command line like this:
 
 ```bash
 python main.py /path/to/input/directory /path/to/output/directory /path/to/config/file
