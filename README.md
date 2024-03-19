@@ -5,7 +5,28 @@ This script is designed to batch process documents using Azure Document Intellig
 ## Requirements
 - Azure AI Document Intelligence resources in one of the 3 preview regions: **East US**, **West US2**, **West Europe** - follow [this document](https://learn.microsoft.com/azure/ai-services/document-intelligence/create-document-intelligence-resource?view=doc-intel-4.0.0) to create one if you don't have.
 
-## Example:
+
+
+## Installation
+
+```bash
+pip install requirements.txt
+```
+
+## Usage
+1- Create a config file similar to config.yaml.example, and add the Azure Doc Intelligance endpoints to it.  
+2- You can run the script from the command line like this:
+
+```bash
+python main.py /path/to/input/directory /path/to/output/directory /path/to/config/file
+```
+## Arguments:
+- input_dir: The directory containing the input document files.
+- output_dir: The directory to write the output files.
+- config_file: Azure AI Document Intelligence endpoints.
+
+
+## Example of parsed content:
 
 - Input: 
 ![sample](https://github.com/maljazaery/azure-doc-batch-processor/blob/main/sample.png)
@@ -46,23 +67,6 @@ Anti-dilutive stock-based awards excluded from the calculations of diluted EPS w
 <!-- PageNumber="10" -->
 ```
 
-## Installation
-
-```bash
-pip install requirements.txt
-```
-
-## Usage
-1- Create a config file similar to config.yaml.example, and add the Azure Doc Intelligance endpoints to it.  
-2- You can run the script from the command line like this:
-
-```bash
-python main.py /path/to/input/directory /path/to/output/directory /path/to/config/file
-```
-## Arguments:
-- input_dir: The directory containing the input document files.
-- output_dir: The directory to write the output files.
-- config_file: Azure AI Document Intelligence endpoints.
 
 ## Disclaimer:
 This is NOT an official Microsoft product. 
