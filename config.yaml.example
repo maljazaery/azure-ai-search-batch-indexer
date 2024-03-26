@@ -1,10 +1,22 @@
 # - An Azure AI Document Intelligence resource in one of the 3 preview regions: **East US**, **West US2**, **West Europe** 
 #- follow [this document](https://learn.microsoft.com/azure/ai-services/document-intelligence/create-document-intelligence-resource?view=doc-intel-4.0.0) to create one if you don't have.
-# endpoints should be spread over multiple regions to ensure better efficincy and scalability
+# endpoints should be spread over multiple regions to ensure better scalability
 
-endpoints_keys:
-  - endpoint: "https://endpoint1.cognitiveservices.azure.com/"
+doc_intel_endpoints_keys:
+  - endpoint: ""
     key: ""
     
-  - endpoint: "https://enpoint2.cognitiveservices.azure.com/"
+  - endpoint: ""
     key: ""
+
+openai_api_version: "2024-02-15-preview"
+openai_api_base: 'https://[].openai.azure.com/'
+openai_api_key: ''
+embeddings_model_name: 'text-embedding-ada-002'
+
+azure_search_index_name: ""
+azure_search_url: "https://[]/"
+azure_search_key: ""
+
+chunk_size: 600
+chunk_overlap: 200

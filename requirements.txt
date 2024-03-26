@@ -5,3 +5,8 @@ langchainhub
 openai
 tiktoken
 azure-ai-documentintelligence
+requests
+azure-search-documents
+azure-storage-blob
+tenacity
+tiktoken

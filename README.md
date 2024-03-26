@@ -1,9 +1,13 @@
 
-# Azure Document Intelligence Parser - Batch Processing Using Multiple Endpoints
-This script is designed to batch process documents using Azure Document Intelligence Service. It transforms unstructured text into a **structured markdown** format, which facilitates the identification of section breakpoints, as well as, generating a better text represetaions for table data. This is particularly useful in the development of RAG AI application.
+# Azure Document Parser and indexer - Batch Processing Using Multiple Endpoints
+This script is designed to batch process documents using Azure Document Intelligence Service and ingest them into Azure AI search index. 
+
+It transforms doc unstructured text into a **structured markdown** format, which facilitates the identification of section breakpoints, as well as, generating a better text represetaions for table data. This is particularly useful in the development of RAG AI application. Then index them into Azure search service.
 
 ## Requirements
 - Azure AI Document Intelligence resources in one of the 3 preview regions: **East US**, **West US2**, **West Europe** - follow [this document](https://learn.microsoft.com/azure/ai-services/document-intelligence/create-document-intelligence-resource?view=doc-intel-4.0.0) to create one if you don't have.
+- Azure AI Search rescource 
+
 
 
 
@@ -15,7 +19,8 @@ pip install requirements.txt
 
 ## Usage
 1- Create a config file similar to config.yaml.example, and add the Azure Doc Intelligance endpoints to it.  
-2- You can run the script from the command line like this:
+2- Create the index using json schema file. Replace the index name and embedding endpoint when import it to the AI search portal portal. 
+3- You can run the script from the command line like this:
 
 ```bash
 python main.py /path/to/input/directory /path/to/output/directory /path/to/config/file
@@ -24,6 +29,11 @@ python main.py /path/to/input/directory /path/to/output/directory /path/to/confi
 - input_dir: The directory containing the input document files.
 - output_dir: The directory to write the output files.
 - config_file: Azure AI Document Intelligence endpoints.
+
+## Results:
+1- txt file of the raw markdown content saved to the output folder. 
+2- Json file of all chunks saved to the output folder.
+3- Chunks uploaded into the Azure AI search Index.
 
 
 ## Example of parsed content:
