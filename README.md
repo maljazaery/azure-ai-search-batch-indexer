@@ -18,8 +18,10 @@ pip install requirements.txt
 ```
 
 ## Usage
-1- Create a config file similar to config.yaml.example, and add the Azure Doc Intelligance and Azure AI Search  endpoints  to it.  
-2- Create an index using schema.json file. Edit the index name and embedding endpoint before you import it to the AI search portal. 
+1- Create a config file similar to config.yaml.example, and add the Azure Doc Intelligance and Azure AI Search  endpoints  to it. 
+
+2- Create an index using schema.json file. Edit the index name and embedding endpoint before you import it to the AI search portal.
+
 3- You can run the script from the command line like this:
 
 ```bash
