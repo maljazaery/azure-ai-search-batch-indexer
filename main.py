@@ -16,7 +16,7 @@ from tenacity import retry, wait_random_exponential, stop_after_attempt
 import re
 from azure.search.documents import SearchClient  
 from azure.core.credentials import AzureKeyCredential 
-from langchain_community.embeddings import AzureOpenAIEmbeddings 
+from langchain_openai import AzureOpenAIEmbeddings
 
 
 # Create the parser
