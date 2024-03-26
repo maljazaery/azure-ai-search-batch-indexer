@@ -18,8 +18,8 @@ pip install requirements.txt
 ```
 
 ## Usage
-1- Create a config file similar to config.yaml.example, and add the Azure Doc Intelligance endpoints to it.  
-2- Create the index using json schema file. Replace the index name and embedding endpoint when import it to the AI search portal portal. 
+1- Create a config file similar to config.yaml.example, and add the Azure Doc Intelligance and Azure AI Search  endpoints  to it.  
+2- Create an index using schema.json file. Edit the index name and embedding endpoint before you import it to the AI search portal. 
 3- You can run the script from the command line like this:
 
 ```bash
@@ -31,9 +31,9 @@ python main.py /path/to/input/directory /path/to/output/directory /path/to/confi
 - config_file: Azure AI Document Intelligence endpoints.
 
 ## Results:
-1- txt file of the raw markdown content saved to the output folder. 
-2- Json file of all chunks saved to the output folder.
-3- Chunks uploaded into the Azure AI search Index.
+ - txt file of the raw markdown content saved to the output folder. 
+ - Json file of all chunks saved to the output folder.
+ - Chunks uploaded into the Azure AI search Index.
 
 
 ## Example of parsed content:
