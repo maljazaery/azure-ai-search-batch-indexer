@@ -2,8 +2,6 @@
 # This code demonstrates an example of using [LangChain](https://www.langchain.com/) to delvelop AI based PDF file processer and chunker using parallel processing with multi endpoints. It uses Azure AI Document Intelligence as document loader, which can extracts tables, paragraphs, and layout information from pdf, image, office and html files. The output markdown can be used in LangChain's markdown header splitter, which enables semantic chunking of the documents. 
 
 # ## Prerequisites
-
-
 from langchain_community.document_loaders import AzureAIDocumentIntelligenceLoader
 from langchain.text_splitter import MarkdownHeaderTextSplitter,TokenTextSplitter
 import concurrent.futures
@@ -63,8 +61,6 @@ def normalize_text(s, sep_token = " \n "):
     return s
 
 
-
-
 # Create an instance of the AzureOpenAIEmbeddings class
 embeddings = AzureOpenAIEmbeddings(
     azure_endpoint = config["openai_api_base"],
@@ -108,59 +104,49 @@ def save_parsed_text(file_path, doc_string):
     # Write the doc_string to the output file
     with open(output_file, 'w') as f:
         f.write(doc_string)
-    print(f"File saved to {output_file}")
+    
 
 
 
 # Function to process the document
 def load_and_parse(file_path):
-    print(f"processing {file_path}")
-    
     # Choose a random endpoint-key pair
     endpoints_keys = config['doc_intel_endpoints_keys']
     endpoint_key = random.choice(endpoints_keys)
     endpoint = endpoint_key['endpoint']
     key = endpoint_key['key']
-    print(f"Using endpoint: {endpoint}")
-    
-    loader = AzureAIDocumentIntelligenceLoader(file_path=file_path, api_key = key, api_endpoint = endpoint, api_model="prebuilt-layout")
-    doc = loader.load()
-    doc_string = doc[0].page_content
-    
-    return file_path,doc_string
+    print(f"processing {file_path}, Using endpoint: {endpoint}")
+    try:
+        loader = AzureAIDocumentIntelligenceLoader(file_path=file_path, api_key = key, api_endpoint = endpoint, api_model="prebuilt-layout")
+        doc = loader.load()
+        output_txt = doc[0].page_content
+    except Exception as e:
+        print(f"Error in doc intelligence loader, file {file_path}: {str(e)}")
 
-
-
-
-
-# List of files to process
-files = [os.path.join(input_dir, file) for file in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, file))]
-
-# Use ThreadPoolExecutor to process the files in parallel
-with concurrent.futures.ThreadPoolExecutor() as executor:
-    # Use list comprehension to get a list of futures
-    futures = [executor.submit(load_and_parse, file) for file in files]
-
-    for future in concurrent.futures.as_completed(futures):
-        file_path = future.result()[0]
-        output_txt = future.result()[1]
-        print(f"Done: {file_path}")
-        # Save the parsed text to a file
+    # Save the parsed text to a file
+    try:
         save_parsed_text(file_path, output_txt)
+    except Exception as e:
+        print(f"Error in saving text from intelligence loader, file {file_path}: {str(e)}")
 
-        # Split the output into chunks
-        content = output_txt
+    # Split the output into chunks
+    content = output_txt
+    try:
         md_header_splits = markdown_splitter.split_text(content)
-        documents = []
-        section_counter = 0
-        total_sections = len(md_header_splits)
-        chunk_id = 0
-        for s in md_header_splits:
+    except Exception as e:
+        print(f"Error in markdown_splitter, file {file_path}: {str(e)}")
+
+    documents = []
+    section_counter = 0
+    total_sections = len(md_header_splits)
+    chunk_id = 0
+    for s in md_header_splits:
+        try:
             section_counter+=1
             section_content = s.page_content
             chunks = text_splitter.split_text(section_content)
-            print ('Processing Section:', section_counter, 'of', total_sections, 'with', len(chunks), 'chunks...')
-    
+            #print ('Processing Section:', section_counter, 'of', total_sections, 'with', len(chunks), 'chunks...')
+
             if chunks != []:
                 for chunk in chunks:
                     json_data = {} 
@@ -177,18 +163,47 @@ with concurrent.futures.ThreadPoolExecutor() as executor:
                     documents.append(json_data)
                     
             else:
-                print ('No content found for this file')
-        
+                print (f'No content found for {file_path}')
+        except Exception as e:
+            print(f"Error in creating chunks and embedding, file {file_path}: {str(e)}")
 
+    if len(documents) > 0:
+        #print('Uploading ', len(documents), ' documents to Azure Search...')
         #upload the chunks to Azure Search
-        search_client.upload_documents(documents)
+        try:
+            search_client.upload_documents(documents)
+        except Exception as e:
+            print(f"Error in uploading doc to Azure AI Search index, file {file_path}: {str(e)}")
 
         # save as a json file
-        ext = "." + file_path.split(".")[-1]
-        base_name = os.path.basename(file_path).replace(ext, "")
-        json_out_file = os.path.join(OUTPUT_DIR, base_name)+ ".json"
-        with open(json_out_file, "w") as j_out:
-            j_out.write(json.dumps(documents))
+        try:
+            ext = "." + file_path.split(".")[-1]
+            base_name = os.path.basename(file_path).replace(ext, "")
+            json_out_file = os.path.join(OUTPUT_DIR, base_name)+ ".json"
+            with open(json_out_file, "w") as j_out:
+                j_out.write(json.dumps(documents))
+        except Exception as e:
+            print(f"Error in saving json, file {file_path}: {str(e)}")
+
+    
+    return file_path
+
+
+
+
+
+# List of files to process
+files = [os.path.join(input_dir, file) for file in os.listdir(input_dir) if os.path.isfile(os.path.join(input_dir, file))]
+
+# Use ThreadPoolExecutor to process the files in parallel
+with concurrent.futures.ThreadPoolExecutor() as executor:
+    # Use list comprehension to get a list of futures
+    futures = [executor.submit(load_and_parse, file) for file in files]
+    
+    for future in concurrent.futures.as_completed(futures):
+        file_path = future.result()[0]
+        print(f"Done processing: {file_path}")
+        
         
         
 
