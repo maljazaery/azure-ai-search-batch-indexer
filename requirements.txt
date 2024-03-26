@@ -10,3 +10,4 @@ azure-search-documents
 azure-storage-blob
 tenacity
 tiktoken
+langchain-openai
