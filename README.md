@@ -6,8 +6,8 @@ It transforms doc unstructured text into a **structured markdown** format, which
 
 ## Requirements
 - Azure AI Document Intelligence resources in one of the 3 preview regions: **East US**, **West US2**, **West Europe** - follow [this document](https://learn.microsoft.com/azure/ai-services/document-intelligence/create-document-intelligence-resource?view=doc-intel-4.0.0) to create one if you don't have.
-- Azure AI Search rescource 
-
+- Azure AI Search rescource.
+- Azure OpenAI Embedding endpoint.
 
 
 
@@ -18,9 +18,9 @@ pip install requirements.txt
 ```
 
 ## Usage
-1- Create a config file similar to config.yaml.example, and add the Azure Doc Intelligance and Azure AI Search  endpoints  to it. 
+1- Create an index using schema.json file. Edit the index name and embedding endpoint before you import it to the AI search portal.
 
-2- Create an index using schema.json file. Edit the index name and embedding endpoint before you import it to the AI search portal.
+2- Create a config file similar to config.yaml.example, and add the Azure Doc Intelligance and Azure AI Search  endpoints  to it. 
 
 3- You can run the script from the command line like this:
 
