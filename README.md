@@ -4,6 +4,18 @@ This script is designed to batch process documents using Azure Document Intellig
 
 It transforms doc unstructured text into a **structured markdown** format, which facilitates the identification of section breakpoints, as well as, generating a better text represetaions for table data. This is particularly useful in the development of RAG AI application. Then it chunks and indexes the doc into Azure search service.
 
+
+## Features
+- [x] Multi-threading.
+- [x] Distribution over multiple Doc Intelligence endpoints.
+- [x] Save intermediate outputs. 
+- [x] Error handling.
+- [x] Easy to configure.
+- [x] Easy to customize code (Add new meta data to your index).
+- [ ] Multiple embedding endpoints.
+- [ ] Support other file formats, currently only PDFs.
+
+
 ## Requirements
 - Azure AI Document Intelligence resources in one of the 3 preview regions: **East US**, **West US2**, **West Europe** - follow [this document](https://learn.microsoft.com/azure/ai-services/document-intelligence/create-document-intelligence-resource?view=doc-intel-4.0.0) to create one if you don't have.
 - Azure AI Search rescource.
