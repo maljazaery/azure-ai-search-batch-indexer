@@ -91,6 +91,8 @@ Anti-dilutive stock-based awards excluded from the calculations of diluted EPS w
 <!-- PageNumber="10" -->
 ```
 
+## Acknowledgement
+Part of the code is borrowed from [Azure AI Search - Python Based Content Vectorization and Enrichment](https://github.com/liamca/azure-ai-search-vector-indexing).
 
 ## Disclaimer:
 This is NOT an official Microsoft product. 
