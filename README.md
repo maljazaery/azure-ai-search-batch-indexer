@@ -6,9 +6,9 @@ It transforms doc unstructured text into a **structured markdown** format, which
 
 
 ## Features
-- [x] Multi-threading.
-- [x] Distribution over multiple Doc Intelligence endpoints.
-- [x] Save intermediate outputs. 
+- [x] Multi-threading (parallel processing).
+- [x] Support for multiple Doc Intelligence endpoints.
+- [x] Access to intermediate outputs.
 - [x] Error handling.
 - [x] Easy to configure.
 - [x] Easy to customize code (Add new meta data to your index).
